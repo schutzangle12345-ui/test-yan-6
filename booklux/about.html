@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | BookLux — AI Luxury Concierge</title>
+    <meta name="description" content="Learn about BookLux, the AI-driven concierge platform simplifying luxury travel and lifestyle management for high-net-worth individuals.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #D72424;
+            --color-primary-dark: #b71f1f;
+            --color-background: #0A0A0A;
+            --color-surface: #121212;
+            --color-text: #FFFFFF;
+            --color-text-muted: #8E8E8E;
+            --color-border: #1F1F1F;
+            --color-accent: #FFFFFF;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --transition: 0.2s ease-in-out;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            color: var(--color-text);
+        }
+
+        p {
+            color: var(--color-text-muted);
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 120px 0;
+        }
+
+        @media (min-width: 1024px) {
+            section {
+                padding: 160px 0;
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--color-border);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--color-text);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--color-accent);
+            color: #000000;
+        }
+
+        .btn-primary:hover {
+            background-color: #E6E6E6;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--color-text);
+            border: 1px solid var(--color-border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--color-text-muted);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: 200px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            max-width: 900px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero p {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            font-size: 1.25rem;
+        }
+
+        /* About Sections */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .image-placeholder {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            aspect-ratio: 4/3;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content-block h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Values Grid */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .value-card {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            padding: 3rem;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .value-card:hover {
+            border-color: var(--color-primary);
+        }
+
+        .value-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background-color: var(--color-surface);
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        input, textarea, select {
+            background: var(--color-background);
+            border: 1px solid var(--color-border);
+            padding: 1rem;
+            color: var(--color-text);
+            font-family: var(--font-sans);
+            border-radius: 6px;
+            outline: none;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--color-primary);
+        }
+
+        /* Footer */
+        footer {
+            padding: 80px 0;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 4rem;
+        }
+
+        .footer-logo {
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--color-text);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-icon {
+            width: 24px;
+            height: 24px;
+            fill: var(--color-text-muted);
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            fill: var(--color-primary);
+        }
+
+        .copyright {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        .accent-text {
+            color: var(--color-primary);
+        }
+    </style>
+  <base href="/booklux/" />
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="test-yan-6 logo" style="height:40px;object-fit:contain">
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html" style="color: var(--color-text);">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="auth.html">Sign In</a>
+                <a href="contact.html" class="btn btn-primary" data-track="cta_click">Request Access</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero">
+            <div class="container">
+                <h1>Crafting <span class="accent-text">Unforgettable</span> Logistics for the Discerning.</h1>
+                <p>BookLux is more than a booking platform. We are an AI-driven ecosystem designed to solve the friction of luxury travel, bringing jets, yachts, and villas into one seamless conversation.</p>
+                <div style="display: flex; gap: 1rem; justify-content: center;">
+                    <a href="contact.html" class="btn btn-primary" data-track="cta_click">Begin Your Journey</a>
+                    <a href="#story" class="btn btn-secondary">Our Story</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Story -->
+        <section id="story">
+            <div class="container">
+                <div class="grid">
+                    <div class="content-block">
+                        <h4 class="accent-text" style="margin-bottom: 1rem; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em;">The Genesis</h4>
+                        <h2>Why we built BookLux.</h2>
+                        <p>In the world of high-end travel, complexity is the enemy of experience. For too long, booking a private jet or a Mediterranean yacht charter meant juggling dozens of brokers, opaque contracts, and fragmented communications.</p>
+                        <p>We saw family offices and personal assistants spending hundreds of hours on simple logistics. We built BookLux to return that time. By combining advanced AI concierge capabilities with a curated network of global providers, we've unified the luxury landscape.</p>
+                    </div>
+                    <div class="image-placeholder">
+                        <span style="color: var(--color-text-muted); font-size: 0.9rem;">[Curated Luxury Logistics Interface]</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values -->
+        <section style="background-color: #0F0F0F;">
+            <div class="container">
+                <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+                    <h4 class="accent-text" style="margin-bottom: 1rem; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em;">Our Principles</h4>
+                    <h2>The BookLux Standard</h2>
+                </div>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <h3>Radical Transparency</h3>
+                        <p>No hidden fees, no opaque markup. Whether it's the APA on a yacht or empty leg pricing on a heavy jet, we provide the full picture so you can decide instantly.</p>
+                    </div>
+                    <div class="value-card">
+                        <h3>Unified Communication</h3>
+                        <p>One chat interface for everything. Your villa contract, your pilot's details, and your private chef's menu all live in one secure, AI-managed hub.</p>
+                    </div>
+                    <div class="value-card">
+                        <h3>Uncompromising Vetting</h3>
+                        <p>We only work with partners who meet the highest safety and service standards. Every driver, chef, and crew member is part of a trusted global circle.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- For Professionals -->
+        <section>
+            <div class="container">
+                <div class="grid">
+                    <div class="image-placeholder" style="order: 2;">
+                        <span style="color: var(--color-text-muted); font-size: 0.9rem;">[Family Office Dashboard View]</span>
+                    </div>
+                    <div class="content-block" style="order: 1;">
+                        <h4 class="accent-text" style="margin-bottom: 1rem; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em;">For Staff & Advisors</h4>
+                        <h2>Built for Family Offices & PAs.</h2>
+                        <p>We understand that the job of a Lifestyle Manager or Personal Assistant is demanding. BookLux acts as your force multiplier. Our AI handles the initial sourcing and comparison, presenting you with the top three vetted options for any request within minutes.</p>
+                        <p>When plans change—and they always do—you have a single point of contact to handle re-bookings, refunds, and logistical shifts across multiple vendors.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA / Form -->
+        <section class="contact-section">
+            <div class="container">
+                <div style="text-align: center; max-width: 700px; margin: 0 auto 4rem;">
+                    <h2>Inquire for Access</h2>
+                    <p>Membership and access to the BookLux AI concierge are currently available via invitation or application. Contact our team to discuss your requirements.</p>
+                </div>
+                <form data-backend="form">
+                    <div class="grid" style="gap: 1.5rem; grid-template-columns: 1fr 1fr; align-items: flex-start;">
+                        <div class="form-group">
+                            <label style="font-size: 0.8rem; color: var(--color-text-muted);">Full Name</label>
+                            <input type="text" name="name" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: 0.8rem; color: var(--color-text-muted);">Email Address</label>
+                            <input type="email" name="email" placeholder="john@example.com" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label style="font-size: 0.8rem; color: var(--color-text-muted);">Primary Interest</label>
+                        <select name="interest">
+                            <option value="private-jets">Private Jet Charter</option>
+                            <option value="yachts">Yacht Charters</option>
+                            <option value="villas">Luxury Villa Rentals</option>
+                            <option value="concierge">Full Concierge Services</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label style="font-size: 0.8rem; color: var(--color-text-muted);">How can we help?</label>
+                        <textarea name="message" rows="5" placeholder="Tell us about your upcoming travel plans..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; height: 60px;">Submit Application</button>
+                    <p data-success style="display:none; color: #2ecc71; font-weight: bold; margin-top: 1rem; text-align: center;">Success! Our concierge team will reach out shortly.</p>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="index.html" class="footer-logo">
+                        <img src="logo.png" alt="test-yan-6 logo" style="height:32px;object-fit:contain">
+                    </a>
+                    <p style="font-size: 0.9rem; max-width: 250px;">The AI-powered concierge for high-net-worth individuals and family offices.</p>
+                    <div class="social-icons">
+                        <a href="#">
+                            <svg class="social-icon" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                        </a>
+                        <a href="#">
+                            <svg class="social-icon" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.266.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.267-.07-1.646-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 1.5rem; font-size: 0.9rem;">Platform</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Services</a></li>
+                        <li><a href="auth.html">Account</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 1.5rem; font-size: 0.9rem;">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2026 test-yan-6. All rights reserved. Registered affiliate of premium luxury partners worldwide.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+      var BACKEND = 'http://localhost:3000/api';
+      var TOKEN = '00f6b226360c61503f440b3294a5253f7893f128f33530c33550c3c12a613c31';
+      var DOMAIN = 'booklux.ai';
+      var HEADERS = { 'Content-Type': 'application/json', 'X-Token': TOKEN, 'X-Domain': DOMAIN };
+
+      // 1. Auto-track pageview
+      fetch(BACKEND + '/track', {
+        method: 'POST',
+        headers: HEADERS,
+        body: JSON.stringify({ event: 'pageview', path: window.location.pathname })
+      }).catch(function(){});
+
+      // 2. Track CTA clicks
+      document.addEventListener('click', function(e) {
+        var el = e.target.closest('[data-track]');
+        if (el) {
+          fetch(BACKEND + '/track', {
+            method: 'POST',
+            headers: HEADERS,
+            body: JSON.stringify({ event: el.getAttribute('data-track'), path: window.location.pathname })
+          }).catch(function(){});
+        }
+      });
+
+      var FORM_ID = '131';
+
+      // 3. Handle forms (Contact, Signup, Waitlist)
+      document.addEventListener('submit', function(e) {
+        var form = e.target.closest('form[data-backend]');
+        if (!form) return;
+        e.preventDefault();
+        var type = form.getAttribute('data-backend');
+        var endpoint = type === 'signup' ? '/users' : '/forms/submit';
+        
+        // Extract dynamic form fields
+        var data = {};
+        new FormData(form).forEach(function(v, k) { data[k] = v; });
+        
+        // Add Form ID if it's a general form and we have it
+        if (type === 'form' && FORM_ID) {
+          data.formId = FORM_ID;
+        }
+
+        var btn = form.querySelector('button[type="submit"]');
+        var originalText = '';
+        if (btn) {
+          originalText = btn.innerText;
+          btn.innerText = 'Sending...';
+          btn.disabled = true;
+        }
+
+        // Track Form Submission Event
+        fetch(BACKEND + '/track', {
+          method: 'POST',
+          headers: HEADERS,
+          body: JSON.stringify({ 
+            event: 'form_submission', 
+            path: window.location.pathname,
+            metadata: { formType: type } 
+          })
+        }).catch(function(){});
+
+        // Submit Form Data
+        fetch(BACKEND + endpoint, {
+          method: 'POST',
+          headers: HEADERS,
+          body: JSON.stringify(data)
+        }).then(function(r) { return r.json(); }).then(function(res) {
+          if (res.success) {
+            var msg = form.querySelector('[data-success]');
+            if (msg) { msg.style.display = 'block'; }
+            form.reset();
+            if (btn) btn.style.display = 'none';
+          } else {
+            alert(res.error || 'Failed to submit form');
+            if (btn) { btn.innerText = originalText; btn.disabled = false; }
+          }
+        }).catch(function(){
+          alert('Network error occurred');
+          if (btn) { btn.innerText = originalText; btn.disabled = false; }
+        });
+      });
+    })();
+    </script>
+</body>
+</html>
