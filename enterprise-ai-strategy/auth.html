@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In & Sign Up | test-yan-6 - Enterprise AI Strategy</title>
+    <meta name="description" content="Access your enterprise AI strategy roadmap and AI application development portal.">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap');
+
+        :root {
+            --color-primary: #d92128;
+            --color-primary-dark: #b81c22;
+            --color-background: #0a0a0a;
+            --color-surface: #1a1a1a;
+            --color-text: #ffffff;
+            --color-text-muted: #a1a1a1;
+            --color-border: #2a2a2a;
+            --color-accent: #ffffff;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --radius-pill: 9999px;
+            --radius-card: 32px;
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navigation */
+        header {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+
+        .nav-links {
+            display: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--color-primary);
+        }
+
+        .btn-cta {
+            background: var(--color-primary);
+            color: white;
+            padding: 0.75rem 1.75rem;
+            border-radius: var(--radius-pill);
+            text-decoration: none;
+            font-weight: 700;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-cta:hover {
+            background: var(--color-primary-dark);
+            transform: translateY(-1px);
+        }
+
+        /* Auth Container */
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 1.5rem 3rem;
+        }
+
+        .auth-card {
+            background: var(--color-surface);
+            width: 100%;
+            max-width: 480px;
+            padding: 3rem 2rem;
+            border-radius: var(--radius-card);
+            border: 1px solid var(--color-border);
+            text-align: center;
+        }
+
+        .auth-logo {
+            margin-bottom: 2rem;
+            display: inline-block;
+        }
+
+        .auth-card h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            background: #000000;
+            padding: 0.4rem;
+            border-radius: var(--radius-pill);
+            margin-bottom: 2.5rem;
+            border: 1px solid var(--color-border);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: none;
+            background: transparent;
+            color: var(--color-text-muted);
+            font-weight: 600;
+            font-family: var(--font-sans);
+            cursor: pointer;
+            border-radius: var(--radius-pill);
+            transition: var(--transition);
+        }
+
+        .tab-btn.active {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        /* Forms */
+        .auth-form {
+            text-align: left;
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-group input {
+            width: 100%;
+            background: #000000;
+            border: 1px solid var(--color-border);
+            padding: 1rem 1.25rem;
+            border-radius: 16px;
+            color: white;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 4px rgba(217, 33, 40, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--color-primary);
+            color: white;
+            padding: 1.1rem;
+            border-radius: var(--radius-pill);
+            border: none;
+            font-weight: 800;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: var(--transition);
+        }
+
+        .submit-btn:hover {
+            background: var(--color-primary-dark);
+            transform: scale(1.01);
+        }
+
+        .auth-footer {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+        }
+
+        .auth-footer a {
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 2rem;
+            border-top: 1px solid var(--color-border);
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            text-align: center;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 2fr 1fr 1fr;
+                text-align: left;
+            }
+        }
+
+        .footer-logo { margin-bottom: 1.5rem; }
+
+        .footer-links h4 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--color-primary);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .social-icons { justify-content: flex-start; }
+        }
+
+        .social-icons svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--color-text-muted);
+            transition: var(--transition);
+        }
+
+        .social-icons svg:hover {
+            fill: var(--color-primary);
+        }
+
+        .copyright {
+            color: #444;
+            font-size: 0.85rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+    </style>
+  <base href="/enterprise-ai-strategy/" />
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">
+            <img src="logo.png" alt="test-yan-6 logo" style="height:40px;object-fit:contain">
+        </a>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="auth.html" class="btn-cta" data-track="cta_click">Get Started</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="auth-card">
+            <div class="auth-logo">
+                <img src="logo.png" alt="test-yan-6 logo" style="height:50px;object-fit:contain">
+            </div>
+            <h1>Strategy Portal</h1>
+
+            <div class="tabs">
+                <button class="tab-btn" onclick="switchTab('signin')" id="signin-tab-btn">Sign In</button>
+                <button class="tab-btn active" onclick="switchTab('signup')" id="signup-tab-btn">Sign Up</button>
+            </div>
+
+            <!-- Sign Up Tab -->
+            <div id="signup-section" class="auth-form active">
+                <form data-backend="signup">
+                    <input type="hidden" name="role" value="user">
+                    <div class="form-group">
+                        <label for="signup-email">Enterprise Email</label>
+                        <input type="email" id="signup-email" name="email" placeholder="name@company.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" name="password" minlength="6" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="submit-btn" data-track="cta_click">Create Enterprise Account</button>
+                    <p data-success style="display:none; color: #4ade80; font-weight: bold; margin-top: 1.5rem; font-size: 0.9rem;">
+                        Registration successful! Please login.
+                    </p>
+                </form>
+            </div>
+
+            <!-- Sign In Tab -->
+            <div id="signin-section" class="auth-form">
+                <form>
+                    <div class="form-group">
+                        <label for="signin-email">Email</label>
+                        <input type="email" id="signin-email" name="email" placeholder="name@company.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="signin-password">Password</label>
+                        <input type="password" id="signin-password" name="password" placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="submit-btn" data-track="cta_click">Sign In</button>
+                </form>
+                <div class="auth-footer">
+                    <p><a href="#">Forgot your password?</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <div class="footer-logo">
+                    <img src="logo.png" alt="test-yan-6 logo" style="height:35px;object-fit:contain">
+                </div>
+                <p style="color: var(--color-text-muted); max-width: 300px; margin-bottom: 2rem;">
+                    Enterprise AI strategy consulting helping CTOs and CAIOs build high-impact 90-day AI roadmaps.
+                </p>
+                <div class="social-icons">
+                    <a href="#"><svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                    <a href="#"><svg viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.84 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="auth.html">Portal</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 test-yan-6. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+    function switchTab(tab) {
+        const signinSection = document.getElementById('signin-section');
+        const signupSection = document.getElementById('signup-section');
+        const signinBtn = document.getElementById('signin-tab-btn');
+        const signupBtn = document.getElementById('signup-tab-btn');
+
+        if (tab === 'signin') {
+            signinSection.classList.add('active');
+            signupSection.classList.remove('active');
+            signinBtn.classList.add('active');
+            signupBtn.classList.remove('active');
+        } else {
+            signupSection.classList.add('active');
+            signinSection.classList.remove('active');
+            signupBtn.classList.add('active');
+            signinBtn.classList.remove('active');
+        }
+    }
+
+    // Auto-switch to Sign In after successful Sign Up
+    const signupForm = document.querySelector('form[data-backend="signup"]');
+    const successMsg = signupForm.querySelector('[data-success]');
+
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                if (successMsg.style.display === 'block') {
+                    setTimeout(() => {
+                        switchTab('signin');
+                    }, 2000);
+                }
+            }
+        });
+    });
+
+    observer.observe(successMsg, { attributes: true });
+    </script>
+
+    <script>
+    (function() {
+      var BACKEND = 'http://localhost:3000/api';
+      var TOKEN = '1ab31acdc1d63a1cccde3beb9e8ea4567549276b539280f3c8c84ae5a4ac1380';
+      var DOMAIN = 'enterpriseaistrategy.com';
+      var HEADERS = { 'Content-Type': 'application/json', 'X-Token': TOKEN, 'X-Domain': DOMAIN };
+
+      // 1. Auto-track pageview
+      fetch(BACKEND + '/track', {
+        method: 'POST',
+        headers: HEADERS,
+        body: JSON.stringify({ event: 'pageview', path: window.location.pathname })
+      }).catch(function(){});
+
+      // 2. Track CTA clicks
+      document.addEventListener('click', function(e) {
+        var el = e.target.closest('[data-track]');
+        if (el) {
+          fetch(BACKEND + '/track', {
+            method: 'POST',
+            headers: HEADERS,
+            body: JSON.stringify({ event: el.getAttribute('data-track'), path: window.location.pathname })
+          }).catch(function(){});
+        }
+      });
+
+      var FORM_ID = '130';
+
+      // 3. Handle forms (Contact, Signup, Waitlist)
+      document.addEventListener('submit', function(e) {
+        var form = e.target.closest('form[data-backend]');
+        if (!form) return;
+        e.preventDefault();
+        var type = form.getAttribute('data-backend');
+        var endpoint = type === 'signup' ? '/users' : '/forms/submit';
+        
+        // Extract dynamic form fields
+        var data = {};
+        new FormData(form).forEach(function(v, k) { data[k] = v; });
+        
+        // Add Form ID if it's a general form and we have it
+        if (type === 'form' && FORM_ID) {
+          data.formId = FORM_ID;
+        }
+
+        var btn = form.querySelector('button[type="submit"]');
+        var originalText = '';
+        if (btn) {
+          originalText = btn.innerText;
+          btn.innerText = 'Sending...';
+          btn.disabled = true;
+        }
+
+        // Track Form Submission Event
+        fetch(BACKEND + '/track', {
+          method: 'POST',
+          headers: HEADERS,
+          body: JSON.stringify({ 
+            event: 'form_submission', 
+            path: window.location.pathname,
+            metadata: { formType: type } 
+            })
+        }).catch(function(){});
+
+        // Submit Form Data
+        fetch(BACKEND + endpoint, {
+          method: 'POST',
+          headers: HEADERS,
+          body: JSON.stringify(data)
+        }).then(function(r) { return r.json(); }).then(function(res) {
+          if (res.success) {
+            var msg = form.querySelector('[data-success]');
+            if (msg) { msg.style.display = 'block'; }
+            form.reset();
+            if (btn) btn.style.display = 'none';
+          } else {
+            alert(res.error || 'Failed to submit form');
+            if (btn) { btn.innerText = originalText; btn.disabled = false; }
+          }
+        }).catch(function(){
+          alert('Network error occurred');
+          if (btn) { btn.innerText = originalText; btn.disabled = false; }
+        });
+      });
+    })();
+    </script>
+</body>
+</html>
